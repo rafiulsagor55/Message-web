@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+	<title>Add Friends</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			background-color: #f1f1f1;
+			
+		}
+
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		.login-form {
+			background-color: #ffffff;
+			padding: 40px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.login-form input[type="text"],
+		.login-form input[type="password"],
+		.login-form input[type="email"],
+		.login-form button {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-sizing: border-box;
+			/* Include padding and border in the width */
+		}
+
+		.login-form button {
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			cursor: pointer;
+		}
+
+		.login-form p {
+			margin-top: 10px;
+		}
+
+		.login-form a {
+			color: #4CAF50;
+			text-decoration: none;
+		}
+
+		.user-email {
+			font-size: 15px !important;
+		}
+
+
+		.alert-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 1000;
+		}
+
+		.alert-box {
+			background-color: white;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+			text-align: center;
+			width: 300px;
+		}
+
+		.alert-box h2 {
+			margin-top: 0;
+			color: #333;
+		}
+
+		.alert-box p {
+			margin: 15px 0;
+			color: red;
+		}
+
+		.alert-box button {
+			background-color: rgb(51, 209, 122);
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.alert-box button:hover {
+			background-color: rgb(38, 162, 105);
+		}
+
+		/* Hide the alert box by default */
+		#customAlert {
+			display: none;
+		}
+
+		#notification-container {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			z-index: 1000;
+		}
+
+		/* Notification */
+		.notification {
+			background-color: #4caf50;
+			/* Green background */
+			color: white;
+			padding: 10px 20px;
+			margin-bottom: 10px;
+			border-radius: 5px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			font-size: 16px;
+			opacity: 0;
+			transform: translateX(100%);
+			transition: all 0.3s ease;
+		}
+
+		.notification.show {
+			opacity: 1;
+			transform: translateX(0);
+		}
+
+		.notification.error {
+			background-color: #f44336;
+			/* Red background for errors */
+		}
+
+		.notification.info {
+			background-color: #2196f3;
+			/* Blue background for info */
+		}
+
+		.notification.warning {
+			background-color: #ff9800;
+			/* Orange background for warnings */
+		}
+		#back-icon1 {
+		    position: relative;
+		    top: 1px;
+		    left: 2px;
+		    text-align: left;
+		    font-size: 24px;
+		    color: #586c90;
+		    cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- Custom Alert Box -->
+	<div id="customAlert" class="alert-overlay">
+		<div class="alert-box" id="alert-box">
+			<p id="alertMessage">User does not exist!</p>
+			<button onclick="closeAlert()">OK</button>
+		</div>
+	</div>
+
+	<div class="container" id="container">
+
+		<div class="login-form">
+			<i class="fas fa-arrow-left back-icon1" id="back-icon1"></i>
+			<h2>Add Friends</h2>
+			<form id="registrationForm">
+				<label for="email">Email:</label>
+				<input type="email" id="friendEmail" required placeholder="Enter your friend's Email">
+				<button type="submit" id="addUser">Add User</button>
+			</form>
+		</div>
+	</div>
+	<div id="notification-container"></div>
+	<script src="addUser.js"></script>
+</body>
+
+</html>

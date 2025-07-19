@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <title>Profile Page</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #0d4238, #586c90);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .profile-container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      overflow: auto;
+      max-width: 600px;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .profile-picture-section {
+      background: #f7f9fc;
+      padding: 30px;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+    }
+
+    .profile-picture-section img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #586c90;
+      margin-bottom: 20px;
+      display: none;
+
+    }
+
+    .profile-picture-section button {
+      margin: 10px 0;
+      padding: 10px 20px;
+      background: #586c90;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-picture-section button:hover {
+      background: #0d4238;
+    }
+
+    .profile-details-section {
+      padding: 30px;
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .profile-details-section h2 {
+      font-size: 24px;
+      color: #586c90;
+      margin-bottom: 20px;
+    }
+
+    .profile-details-section .form-group {
+      margin-bottom: 15px;
+    }
+
+    .profile-details-section label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .profile-details-section input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .profile-details-section input[readonly] {
+      background-color: #f1f1f1;
+      cursor: not-allowed;
+    }
+
+    .profile-details-section button {
+      padding: 10px 20px;
+      background: #586c90;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .profile-details-section button:hover {
+      background: #0d4238;
+    }
+
+    .password-change {
+      margin-top: 20px;
+      background: #f7f9fc;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .password-change h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #586c90;
+    }
+
+    .password-change input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+      display: block;
+    }
+
+    .password-change a {
+      display: inline-block;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: #586c90;
+      transition: background-color 0.3s ease;
+    }
+
+    .password-change a:hover {
+      background-color: #0d4238;
+    }
+
+    .alert-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .alert-box {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 300px;
+    }
+
+    .alert-box h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .alert-box p {
+      margin: 15px 0;
+      color: red;
+    }
+
+    .alert-box button {
+      background-color: rgb(51, 209, 122);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .alert-box button:hover {
+      background-color: rgb(38, 162, 105);
+    }
+
+    /* Hide the alert box by default */
+    #customAlert {
+      display: none;
+    }
+
+    #notification-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    /* Notification */
+    .notification {
+      background-color: #4caf50;
+      /* Green background */
+      color: white;
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 0.3s ease;
+    }
+
+    .notification.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .notification.error {
+      background-color: #f44336;
+      /* Red background for errors */
+    }
+
+    .notification.info {
+      background-color: #2196f3;
+      /* Blue background for info */
+    }
+
+    .notification.warning {
+      background-color: #ff9800;
+      /* Orange background for warnings */
+    }
+	
+	#back-icon1 {
+		    position: fixed;
+		    top: 20px;
+		    left: 20px;
+		    text-align: left;
+		    font-size: 40px;
+		    color: white;
+		    cursor: pointer;
+		}
+	
+  </style>
+</head>
+
+<body>
+	<i class="fas fa-arrow-left back-icon1" id="back-icon1"></i>
+  <div class="profile-container">
+    <!-- Profile Picture Section -->
+    <div class="profile-picture-section">
+		
+      <i id="profile-icon" class="fa-solid fa-circle-user"
+        style="font-size: 200px; color: #586c90;margin-bottom: 20px;border: 4px solid #586c90;border-radius: 50%;"></i>
+      <img alt="Profile Picture" id="profile-pic">
+
+      <input type="file" id="upload-pic" style="display: none;">
+      <button id="profile-picture-input">Select Picture</button>
+      <button id="update-profile-pic">Update Profile Picture</button>
+    </div>
+
+    <!-- Profile Details Section -->
+    <div class="profile-details-section">
+      <h2>Edit Profile</h2>
+      <div class="form-group" id="updateName">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter Name">
+        <button id="nameButton">Update Name</button>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" readonly>
+      </div>
+
+      <div class="password-change" id="password-change">
+        <h3>Change Password</h3>
+        <input type="password" id="prepass" value="" required placeholder="Enter your previous password">
+        <input type="password" id="postpass" value="" required placeholder="Enter your new password">
+        <a id="passwordButton" href="#change-password">Change Password</a>
+      </div>
+    </div>
+  </div>
+  <div id="customAlert" class="alert-overlay">
+    <div class="alert-box" id="alert-box">
+      <p id="alertMessage">Please upload an Image!</p>
+      <button onclick="closeAlert()">OK</button>
+    </div>
+  </div>
+  <div id="notification-container"></div>
+  <script src="profile.js"></script>
+</body>
+
+</html>

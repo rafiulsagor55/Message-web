@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #0d4238, #586c90);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Container Styling */
+    .container {
+      text-align: center;
+      max-width: 700px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #dcdcdc;
+      margin-bottom: 25px;
+    }
+
+    /* Option Cards */
+    .options {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .option-card {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      width: 45%;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .option-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .option-card p {
+      font-size: 1rem;
+      color: #e0e0e0;
+    }
+
+    /* Hover Effects */
+    .option-card:hover {
+      background: rgba(255, 255, 255, 0.4);
+      color: #000;
+      border-color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .options {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .option-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Our Chatbox</h1>
+    <p>Choose an option to explore our features:</p>
+    <div class="options">
+      <a onclick="loadAndDisplayUsers()" class="option-card">
+        <h2>Online Chat</h2>
+        <p>Real-time chat for effective collaboration.</p>
+      </a>
+      <a href="online-clipboard.html" class="option-card">
+        <h2>Online Clipboard</h2>
+        <p>Quickly copy, save, and share your notes.</p>
+      </a>
+	  <script src="index.js"></script>
+    </div>
+  </div>
+</body>
+</html>

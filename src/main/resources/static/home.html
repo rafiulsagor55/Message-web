@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Home</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <div class="messenger-container" id="messenger-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="settings-menu">
+                <i class="fa-solid fa-bars setting-icon" style="font-size: 25px;"></i>
+                <div class="menu">
+                    <div class="menu-item" id="profile">Profile</div>
+                    <div class="menu-item" id="logout">Log Out</div>
+                    <div id="clipBoard" class="menu-item">Online Clipboard</div>
+                </div>
+            </div>
+            <h3>Chats</h3>
+            <ul class="chat-list">
+
+            </ul>
+            <div class="icon-container">
+                <span class="s">Add User</span>
+                <i class="fa-solid fa-user-plus icon" id="icon"></i>
+            </div>
+        </div>
+
+        <div id="Empty">Select a chat to start messaging</div>
+
+        <!-- Chat Window -->
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header" id="chat-header"></div>
+            <div class="chat-body" id="chatBody">
+                
+            </div>
+            <div class="chat-footer">
+                <input type="text" placeholder="Type a message..." id="messageInput">
+                <label for="fileInput">📎</label>
+                <input type="file" id="fileInput" style="display: none;">
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
+    </div>
+    <div id="notification-container"></div>
+    <div class="container">
+        <!-- Custom Alert Box -->
+
+        <div id="customAlert" class="alert-overlay">
+
+            <div class="alert-box" id="alert-box">
+                <i class="fas fa-arrow-left back-icon1" id="back-icon1"></i>
+                <h3>Selected File:</h3>
+                <h5 id="alertMessage">Fille Empty!</h5>
+                <button onclick="sendFile1()">Send</button>
+            </div>
+        </div>
+    </div>
+    <div class="profile-container" id="profile-container">
+        <!-- Back Icon -->
+        <i class="fas fa-arrow-left back-icon"></i>
+
+        <!-- Profile Picture Section -->
+        <div class="profile-picture-section">
+            <i id="profile-icon" class="fa-solid fa-circle-user"
+                style="font-size: 200px; color: #586c90; margin-bottom: 20px; border: 4px solid #586c90; border-radius: 50%;"></i>
+            <img alt="Profile Picture" id="profile-pic">
+
+        </div>
+
+        <!-- Profile Details Section -->
+        <div class="profile-details-section">
+            <h2>Profile Details</h2>
+            <div class="form-group" id="updateName">
+                <label for="name">Name</label>
+                <input type="text" id="name" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" readonly>
+            </div>
+        </div>
+    </div>
+    <script src="home.js"></script>
+</body>
+
+</html>
