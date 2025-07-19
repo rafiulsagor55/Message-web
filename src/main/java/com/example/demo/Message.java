@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Entity;
@@ -39,8 +40,10 @@ public class Message {
     private Integer deleted = 0;
 
     private static String getCurrentTimeAndDate() {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm a");
+        ZoneId dhakaZone = ZoneId.of("Asia/Dhaka");
+        LocalDateTime now = LocalDateTime.now(dhakaZone);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
         return now.format(formatter);
     }
+
 }
